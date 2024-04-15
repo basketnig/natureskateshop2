@@ -1,0 +1,48 @@
+<html>
+<head>
+    <link rel="stylesheet"
+          href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/css/site.css"/>
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+
+        <div class="navbar-header">
+            <img src="/static/img/logo4.png">
+            <a class="navbar-brand" href="/">natureskateshop</a>
+        </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="">
+                        <img class="log"
+                             src="/static/img/near_log.png">
+                        Log In
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<div class="container">
+
+  {% with messages = get_flashed_messages() %}
+      {% for message in messages %}
+          <div class="alert alert-warning">{{ message }}</div>
+      {% endfor %}
+  {% endwith %}
+
+  {% block body %}
+      BODY OF PAGE GOES HERE VIA INHERITANCE
+  {% endblock %}
+
+</div>
+
+</body>
+</html>

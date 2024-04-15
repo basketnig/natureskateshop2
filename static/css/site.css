@@ -1,0 +1,80 @@
+
+
+div.navbar-header img {
+    width: 30px;
+    float: left;
+    margin-top: 7px;
+    margin-right: 7px;
+}
+
+
+body {
+    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+}
+
+.thing-summary {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.price {
+    color: #333;
+    font-weight: bold;
+}
+
+a.btn {
+    display: inline-block;
+    color: #fff;
+    background-color: #4CAF50;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+a.btn:hover {
+    background-color: #45a049;
+}
+
+#clothes_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+
+div.thing-summary img {
+    width: 15em;
+}
+
+div.thing-summary .price {
+    margin: 0.5em 0;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+
+
+.warning {
+    color: red;
+}
+
+
+
+img.log {
+    height: 20px;
+    width: auto;
+}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h2>All clothes</h2>
+
+    <div id="clothes" class="row">
+      {% for thing in clothes_list %}
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 thing-summary">
+
+              <div class="well">
+                  <h3><a href="/thing/{{ thing.id }}">{{ thing.name }}</a></h3>
+                  <a href="/thing/{{ thing.id }}">
+                      <img src="{{ thing.imgurl }}" class="img-circle">
+                  </a>
+
+                  <div class="price">{{ thing.price_str() }}</div>
+                  <a class="btn btn-primary" href="/thing/{{ thing.id }}">Details</a>
+              </div>
+
+          </div>
+      {% endfor %}
+    </div>
+
+{% endblock %}

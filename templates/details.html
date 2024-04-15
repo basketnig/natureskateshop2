@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <h2>{{ thing.name }}</h2>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <img src="{{ thing.imgurl }}" class="img-responsive">
+        </div>
+
+        <div class="col-xs-8 col-sm-6 col-md-4 col-lg-3">
+            <div class="well">
+                <h3>Price</h3>
+                <p> {{ thing.price_str() }} </p>
+                <a class="btn btn-primary" href="">
+                    Add to Cart
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="details">
+
+        <h3>details</h3>
+
+        <ul>
+            <li>type: {{ thing.type }}</li>
+            <li>color: {{ thing.color }}</li>
+            <li>size: {{ thing.size }}</li>
+            {% if thing.availbility %}
+              <li>Available in stock</li>
+            {% else %}
+              <li class='warning'>It`s sold</li>
+            {% endif %}
+        </ul>
+    </div>
+
+{% endblock %}
