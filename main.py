@@ -77,6 +77,13 @@ def login():
     return render_template('login.html', title='Авторизация', form=form)
 
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/clothes")
+
+
 if __name__ == "__main__":
     db_session.global_init("templates/clothes.db")
     app.run(debug=True)
