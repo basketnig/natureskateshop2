@@ -1,5 +1,7 @@
 from flask import Flask, render_template, redirect
 import db_session
+from thing import ThingsForm
+from things import Things
 from users import User
 from user import RegisterForm, LoginForm
 import db_methods
@@ -82,6 +84,27 @@ def login():
 def logout():
     logout_user()
     return redirect("/clothes")
+
+
+@app.route('/new_thing',  methods=['GET', 'POST'])
+@login_required
+def add_news():
+    form = ThingsForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        things = Things()
+        things.type = form.type.data
+        things.name = form.name.data
+        things.price = form.price.data
+        things.imgurl = form.imgurl.data
+        things.color = form.color.data
+        things.size = form.size.data
+        things.availbility = form.availbility.data
+        db_sess.merge(things)
+        db_sess.commit()
+        return redirect('/')
+    return render_template('new_thing.html', title='Добавление вещи',
+                           form=form)
 
 
 if __name__ == "__main__":
