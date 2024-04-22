@@ -14,4 +14,4 @@ class Things(SqlAlchemyBase):
     imgurl = sqlalchemy.Column(sqlalchemy.String)
     color = sqlalchemy.Column(sqlalchemy.String)
     size = sqlalchemy.Column(sqlalchemy.String)
-    availbility = sqlalchemy.Column(sqlalchemy.Boolean, default=True)
+    availbility = sqlalchemy.Column(sqlalchemy.Boolean, default=False)

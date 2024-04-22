@@ -11,7 +11,7 @@ app = Flask(__name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-app.secret_key = 'this-should-be-something-unguessable'
+app.secret_key = 'yandexlyceum_secret_key'
 
 
 @app.route("/")
@@ -89,6 +89,8 @@ def logout():
 @app.route('/new_thing',  methods=['GET', 'POST'])
 @login_required
 def add_news():
+    if current_user.email != 'fedorlegend@mail.ru':
+        return redirect('/')
     form = ThingsForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
