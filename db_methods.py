@@ -66,6 +66,22 @@ class Thing(object):
         return thing
 
 
+class Cart():
+    def __init__(self, thing_id, user_id, price):
+        self.thing_id = thing_id
+        self.user_id = user_id
+        self.price = price
+
+    @staticmethod
+    def add_to_cart(item):
+        conn = sqlite3.connect("templates/clothes.db")
+        cursor = conn.cursor()
+        QUERY = "INSERT INTO cart (thing_id, user_id, price) VALUES (?, ?, ?)"
+        cursor.execute(QUERY, (item.thing_id, item.user_id, item.price))
+        conn.commit()
+        cursor.close()
+
+
 def db_connect():
     conn = sqlite3.connect("templates/clothes.db")
     cursor = conn.cursor()

@@ -14,9 +14,7 @@
             <div class="well">
                 <h3>Price</h3>
                 <p> {{ thing.price_str() }} </p>
-                <a class="btn btn-primary" href="">
-                    Add to Cart
-                </a>
+                <a class="btn btn-primary" href="/add-to-cart/{{ thing.id }}">Add to Cart</a>
             </div>
         </div>
     </div>

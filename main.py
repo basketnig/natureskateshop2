@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, flash
 import db_session
 from thing import ThingsForm
 from things import Things
@@ -107,6 +107,23 @@ def add_news():
         return redirect('/')
     return render_template('new_thing.html', title='Добавление вещи',
                            form=form)
+
+
+@app.route('/add-to-cart/<int:thing_id>')
+def add_to_cart(thing_id):
+    if current_user.is_authenticated:
+        thing = db_methods.Thing.get_by_id(thing_id)
+        if thing:
+            new_item = db_methods.Cart(thing_id=thing_id, user_id=current_user.id, price=thing.price)
+            db_methods.Cart.add_to_cart(new_item)
+            flash('Товар успешно добавлен в корзину', 'success')
+            return redirect('/clothes')
+        else:
+            flash('Товар не найден', 'error')
+            return redirect('/clothes')
+    else:
+        flash('Для добавления товаров в корзину нужно войти в систему', 'error')
+        return redirect('/login')
 
 
 if __name__ == "__main__":
