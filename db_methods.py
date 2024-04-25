@@ -67,7 +67,8 @@ class Thing(object):
 
 
 class Cart():
-    def __init__(self, thing_id, user_id, price):
+    def __init__(self, thing_name, thing_id, user_id, price):
+        self.thing_name = thing_name
         self.thing_id = thing_id
         self.user_id = user_id
         self.price = price
@@ -76,10 +77,31 @@ class Cart():
     def add_to_cart(item):
         conn = sqlite3.connect("templates/clothes.db")
         cursor = conn.cursor()
-        QUERY = "INSERT INTO cart (thing_id, user_id, price) VALUES (?, ?, ?)"
-        cursor.execute(QUERY, (item.thing_id, item.user_id, item.price))
+        QUERY = "INSERT INTO cart (thing_name, user_id, price) VALUES (?, ?, ?)"
+        cursor.execute(QUERY, (item.thing_name, item.user_id, item.price))
         conn.commit()
         cursor.close()
+
+    @staticmethod
+    def get_total_price_by_user(user_id):
+        conn = sqlite3.connect("templates/clothes.db")
+        cursor = conn.cursor()
+        QUERY = "SELECT SUM(price) FROM cart WHERE user_id = ?"
+        cursor.execute(QUERY, (user_id,))
+        total_price = cursor.fetchone()[0]
+        cursor.close()
+        return total_price
+
+    @staticmethod
+    def get_by_user(user_id):
+        conn = sqlite3.connect("templates/clothes.db")
+        cursor = conn.cursor()
+        QUERY = "SELECT * FROM cart WHERE user_id = ?"
+        cursor.execute(QUERY, (user_id,))
+        user_cart = cursor.fetchall()
+        cursor.close()
+        print(user_cart)
+        return user_cart
 
 
 def db_connect():

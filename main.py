@@ -114,7 +114,7 @@ def add_to_cart(thing_id):
     if current_user.is_authenticated:
         thing = db_methods.Thing.get_by_id(thing_id)
         if thing:
-            new_item = db_methods.Cart(thing_id=thing_id, user_id=current_user.id, price=thing.price)
+            new_item = db_methods.Cart(thing_id=thing_id, thing_name=thing.name, user_id=current_user.id, price=thing.price)
             db_methods.Cart.add_to_cart(new_item)
             flash('Товар успешно добавлен в корзину', 'success')
             return redirect('/clothes')
@@ -124,6 +124,17 @@ def add_to_cart(thing_id):
     else:
         flash('Для добавления товаров в корзину нужно войти в систему', 'error')
         return redirect('/login')
+
+
+@app.route('/cart')
+@login_required
+def cart():
+    user_id = current_user.id
+    user_cart = db_methods.Cart.get_by_user(user_id)
+    total_price = db_methods.Cart.get_total_price_by_user(user_id)
+
+    return render_template('cart.html', title='Корзина',
+                           user_cart=user_cart, total_price=total_price)
 
 
 if __name__ == "__main__":
