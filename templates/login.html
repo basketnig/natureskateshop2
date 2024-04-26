@@ -1,3 +1,9 @@
+{% if current_user.is_authenticated %}
+    {% set redirect_url = url_for('clothes') %}
+    <script>
+        window.location.href = '{{ redirect_url }}';
+    </script>
+{% else %}
 {% extends "base.html" %}
 
 {% block body %}
@@ -27,3 +33,4 @@
         <div>{{ message }}</div>
     </form>
 {% endblock %}
+{% endif %}
